@@ -32,6 +32,18 @@ PrefabInstance:
       propertyPath: RecoilForceOffset
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 319749731608622502, guid: 90a039a744d9ad644b9555430d557cd5, type: 3}
+      propertyPath: launchAudios.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 21faca6a4929d334ba4c06e1f46743b5, type: 3}
+    - target: {fileID: 319749731608622502, guid: 90a039a744d9ad644b9555430d557cd5, type: 3}
+      propertyPath: launchAudios.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 12dce1258adeaeb47aa745e89a9d8cce, type: 3}
+    - target: {fileID: 319749731608622502, guid: 90a039a744d9ad644b9555430d557cd5, type: 3}
+      propertyPath: launchAudios.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: e7024448605d5de4da7706d39fc5ab2f, type: 3}
     - target: {fileID: 1059966792125470782, guid: 90a039a744d9ad644b9555430d557cd5, type: 3}
       propertyPath: m_Name
       value: Submechinegun

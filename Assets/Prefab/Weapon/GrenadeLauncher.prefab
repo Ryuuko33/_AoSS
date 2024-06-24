@@ -8,9 +8,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 319749731608622502, guid: 90a039a744d9ad644b9555430d557cd5, type: 3}
+      propertyPath: launchAudios.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9a2bac650a36a724298fd6cdbb4c9c14, type: 3}
+    - target: {fileID: 319749731608622502, guid: 90a039a744d9ad644b9555430d557cd5, type: 3}
+      propertyPath: launchAudios.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 55f218c225824d1468fdb3e05b9967df, type: 3}
+    - target: {fileID: 319749731608622502, guid: 90a039a744d9ad644b9555430d557cd5, type: 3}
+      propertyPath: launchAudios.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2ea9e375c50a1824fb449168bdbb3232, type: 3}
     - target: {fileID: 1059966792125470782, guid: 90a039a744d9ad644b9555430d557cd5, type: 3}
       propertyPath: m_Name
-      value: Pistol Variant 3
+      value: GrenadeLauncher
       objectReference: {fileID: 0}
     - target: {fileID: 1343742710460304418, guid: 90a039a744d9ad644b9555430d557cd5, type: 3}
       propertyPath: m_Sprite

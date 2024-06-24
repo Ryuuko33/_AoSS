@@ -61,9 +61,9 @@ MonoBehaviour:
   RecoilForceOffset: 0.2
   shakeStrength: 2
   launchAudios:
-  - {fileID: 8300000, guid: 5e6354b191e11a046a9d2eb67fbc7b98, type: 3}
-  - {fileID: 8300000, guid: 7e8b756480af881418b27e3dc00d171b, type: 3}
-  - {fileID: 8300000, guid: 7ff938bbd016e43468d3f55090d03be1, type: 3}
+  - {fileID: 8300000, guid: be320c3620293d44bb2cf0a91148fbff, type: 3}
+  - {fileID: 8300000, guid: d79978ee031a1d941bdbefa4e3b9093e, type: 3}
+  - {fileID: 8300000, guid: fb950a6c72f4589468cb7b9ed22313ef, type: 3}
 --- !u!212 &1343742710460304418
 SpriteRenderer:
   m_ObjectHideFlags: 0

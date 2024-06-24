@@ -40,6 +40,18 @@ PrefabInstance:
       propertyPath: scatteringAngle
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 319749731608622502, guid: 90a039a744d9ad644b9555430d557cd5, type: 3}
+      propertyPath: launchAudios.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: aa41aa33a62532d4db20d601624e6de4, type: 3}
+    - target: {fileID: 319749731608622502, guid: 90a039a744d9ad644b9555430d557cd5, type: 3}
+      propertyPath: launchAudios.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: f3b03069656e521478be7a3883044918, type: 3}
+    - target: {fileID: 319749731608622502, guid: 90a039a744d9ad644b9555430d557cd5, type: 3}
+      propertyPath: launchAudios.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2619df98e9cbd8d4caf7975678a5f62d, type: 3}
     - target: {fileID: 1059966792125470782, guid: 90a039a744d9ad644b9555430d557cd5, type: 3}
       propertyPath: m_Name
       value: ShotGun
