@@ -8,7 +8,16 @@ public class EnemyController : MonoBehaviour
     public int health = 30;
     public int Speed = 3;
     public float FilpTime = 0.05f;
+    public float dyingTime = 0.1f;
     public Material hurtMaterial;
+    public EnemyType enemyType = EnemyType.Normal;
+    public enum EnemyType
+    {
+        Normal,
+        Exporsion,
+        KeepLaunch,
+        DeathLaunch
+    }
 
     private GameObject playerCharacter;
     private Rigidbody2D rigidbody2d;
@@ -16,6 +25,8 @@ public class EnemyController : MonoBehaviour
 
     private Material defaultMaterial;
     private Vector2 move;
+    private Vector2 deadPos;
+    private bool isDying = false;
     private bool isFlipping = false;
     private bool isDead;
     private int faceDir = -1;
@@ -35,6 +46,18 @@ public class EnemyController : MonoBehaviour
     {
         if (isDead)
         {
+            if (isDying)
+            {
+                float delta =  Time.deltaTime / dyingTime;
+                float NewscaleY = transform.localScale.y + delta;
+                transform.localScale = new Vector3(transform.localScale.x, Mathf.Clamp(NewscaleY, -1, 1), 1);
+
+                transform.position = new Vector2(deadPos.x, Mathf.Lerp(deadPos.y, deadPos.y + 1f, Mathf.Sin(Mathf.PI * NewscaleY)));
+                if (Mathf.Abs(NewscaleY) >= 1.0f)
+                {
+                    isDying = false;
+                }
+            }
             return;
         }
         Vector3 moveDirection = playerCharacter.transform.position - transform.position;
@@ -93,8 +116,14 @@ public class EnemyController : MonoBehaviour
     {
         if (!isDead)
         {
-            isDead = true;
+            GetComponent<Animator>().SetBool("IsDead", true);
             transform.GetComponent<BoxCollider2D>().enabled = false;
+            transform.localScale = new Vector3(transform.localScale.x, 0, 1);
+            isDead = true;
+            isDying = true;
+            deadPos = transform.position;
+            spriteRenderer.color = Color.grey;
+            spriteRenderer.sortingLayerName = "Default";
         }
     }
 

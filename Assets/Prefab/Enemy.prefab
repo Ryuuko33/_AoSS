@@ -51,6 +51,7 @@ MonoBehaviour:
   health: 30
   Speed: 3
   FilpTime: 0.05
+  dyingTime: 0.1
   hurtMaterial: {fileID: 2100000, guid: 45f2024ddd556b147b89d7c9a7ca0120, type: 2}
 --- !u!212 &9153030056346884635
 SpriteRenderer:
