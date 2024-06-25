@@ -10,8 +10,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1969626513764228697, guid: 4e0ce33ab3c2a8f4783cda179d55cbf7, type: 3}
       propertyPath: m_Name
-      value: PistolShell
+      value: ShotgunShell
       objectReference: {fileID: 0}
+    - target: {fileID: 6140376397848664677, guid: 4e0ce33ab3c2a8f4783cda179d55cbf7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -717700164, guid: 7e78edd78603ee14c8fade9fbe3215e2, type: 3}
     - target: {fileID: 9127074789363750374, guid: 4e0ce33ab3c2a8f4783cda179d55cbf7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -47,7 +47,15 @@ public class Shell : MonoBehaviour
             rigidbody2d.velocity = Vector2.zero;
             rigidbody2d.gravityScale = 0;
             AudioSource audioSource = GetComponent<AudioSource>();
-            audioSource.PlayOneShot(dropAudios[Random.Range(0, dropAudios.Length)]);
+            AudioClip dropClip = dropAudios[Random.Range(0, dropAudios.Length)];
+            audioSource.PlayOneShot(dropClip);
+            Invoke("RemoveAudioSource", dropClip.length);
         }
+    }
+
+    void RemoveAudioSource()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>(); 
+        Destroy(audioSource);
     }
 }

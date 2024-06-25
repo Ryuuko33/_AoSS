@@ -52,7 +52,7 @@ MonoBehaviour:
   emitterType: 0
   bulletNum: 1
   scatteringAngle: 60
-  shootInverval: 0.1
+  shootInverval: 0.5
   bulletPrefab: {fileID: 1476314401960219810, guid: 25669e5e27e552047a067c1d22283479, type: 3}
   shellPrefab: {fileID: 1969626513764228697, guid: 4e0ce33ab3c2a8f4783cda179d55cbf7, type: 3}
   cursorTexture2d: {fileID: 2800000, guid: f35fd961091782b4696f08fe1086e804, type: 3}

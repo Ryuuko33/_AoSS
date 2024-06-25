@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     public float maxDistance = 100.0f;
     public float force = 300.0f;
     public int damage = 3;
+    public bool isPenetrable = false;
     public GameObject hitVFXPrefab;
     public float shakeStrength = 3.0f;
 
@@ -54,11 +55,30 @@ public class Bullet : MonoBehaviour
         EnemyController enemy = other.collider.GetComponent<EnemyController>();
         if (enemy != null)
         {
-            Instantiate(hitVFXPrefab, other.contacts[0].point, Quaternion.FromToRotation(Vector3.right, other.contacts[0].normal));
+            ContactPoint2D contactP = other.GetContact(0);
+            Instantiate(hitVFXPrefab, contactP.point, Quaternion.FromToRotation(Vector3.right, contactP.normal));
             enemy.TakeDamage(damage);
             cameraShake.Shake(shakeStrength);
-            
-            Destroy(gameObject);
+
+            if (!isPenetrable)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        EnemyController enemy = other.GetComponent<EnemyController>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(damage);
+            cameraShake.Shake(shakeStrength);
+
+            if (!isPenetrable)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

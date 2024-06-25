@@ -17,6 +17,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 319749731608622502, guid: 90a039a744d9ad644b9555430d557cd5, type: 3}
+      propertyPath: shellPrefab
+      value: 
+      objectReference: {fileID: 5999350907712467966, guid: c89c7cd01243bdb45913c64571eb2854, type: 3}
+    - target: {fileID: 319749731608622502, guid: 90a039a744d9ad644b9555430d557cd5, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 7806383616077930604, guid: fc3bcd590e9a2af4c8bee0ba13702893, type: 3}
+    - target: {fileID: 319749731608622502, guid: 90a039a744d9ad644b9555430d557cd5, type: 3}
       propertyPath: offsetRange.x
       value: -5
       objectReference: {fileID: 0}

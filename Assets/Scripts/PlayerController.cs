@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private TextMeshProUGUI coinNumTextGUI;
     private TextMeshProUGUI levelTextGUI;
     private Slider sliderExpProgress;
+    private WeaponUI weaponUI;
 
     private int level = 0;
     private int coinNum = 0;
@@ -58,6 +59,7 @@ public class PlayerController : MonoBehaviour
         coinNumTextGUI = playerCanvas.transform.Find("Text_CoinNum").GetComponent<TextMeshProUGUI>();
         levelTextGUI = playerCanvas.transform.Find("Text_Level").GetComponent<TextMeshProUGUI>();
         sliderExpProgress = playerCanvas.transform.Find("Slider_Exp").GetComponent<Slider>();
+        weaponUI = playerCanvas.transform.Find("WeaponPanel").GetComponent<WeaponUI>();
         
         defaultMaterial = spriteRenderer.material;
 
@@ -167,6 +169,7 @@ public class PlayerController : MonoBehaviour
         GameObject weaponObject = weaponSlot.GetChild(activeWeaponIndex).gameObject;
         weaponObject.SetActive(true);
         weaponController = weaponObject.GetComponent<WeaponController>();
+        weaponUI.SetActiveWeaponImage(activeWeaponIndex);
     }
 
     public int GetPlayerFaceDir()
@@ -194,7 +197,7 @@ public class PlayerController : MonoBehaviour
 
         SetIsInivable(true);
         spriteRenderer.material = hurtMaterial;
-        Invoke("SetDefaultMaterial", 0.05f);
+        Invoke("SetDefaultMaterial", 0.1f);
     }
 
     void SetSelfDead()
@@ -231,14 +234,14 @@ public class PlayerController : MonoBehaviour
         coinNumTextGUI.text = coinNum.ToString();
         
 
-        if (level < levelupNeedCoin.Length)
+        if (level <= levelupNeedCoin.Length)
         {
             if (coinNum >= levelupNeedCoin[level - 1])
             {
                 coinNum -= levelupNeedCoin[level - 1];
                 Levelup();
             }
-            sliderExpProgress.value = (float)coinNum / (float)levelupNeedCoin[level];
+            sliderExpProgress.value = (float)coinNum / (float)levelupNeedCoin[Math.Clamp(level - 1, 0, levelupNeedCoin.Length - 1)];
         }
     }
 
@@ -247,6 +250,7 @@ public class PlayerController : MonoBehaviour
         level += 1;
         levelTextGUI.text = "Level:" + level;
 
+        weaponUI.AddNewWeaponImage(level - 1);
         SetActiveWeapon(level - 1);
     }
 
