@@ -47,4 +47,9 @@ MonoBehaviour:
   isEnable: 0
   spawnInterval: 2
   spawnRange: {x: 10, y: 15}
-  EnemyPrefab: {fileID: 1323343018852897848, guid: 774f001095937e24e9687c119854bce9, type: 3}
+  EnemyPrefabs:
+  - {fileID: 1323343018852897848, guid: 774f001095937e24e9687c119854bce9, type: 3}
+  - {fileID: 7188128786328629454, guid: bfc38a713b8232e43a14dc4c18ee85cb, type: 3}
+  - {fileID: 8371291673486257329, guid: 685bfc8c51c86dc42b87165782c12922, type: 3}
+  - {fileID: 7791343144797399393, guid: ad1c23f39f20a234ea3180b0664dafee, type: 3}
+  EnemyWeights: 280000001e000000140000000a000000

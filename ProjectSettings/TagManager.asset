@@ -42,8 +42,14 @@ TagManager:
   - name: Tilemap
     uniqueID: 1029095597
     locked: 0
+  - name: Shell
+    uniqueID: 642435613
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Pick
+    uniqueID: 2803620767
     locked: 0
   - name: Player
     uniqueID: 456198831
@@ -54,6 +60,6 @@ TagManager:
   - name: Enemy
     uniqueID: 1007937493
     locked: 0
-  - name: Shell
-    uniqueID: 642435613
+  - name: UI
+    uniqueID: 2730415077
     locked: 0

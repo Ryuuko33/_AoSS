@@ -1,29 +1,42 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     public InputAction FireAction;
     public InputAction MoveAction;
+    public InputAction SwitchAction;
     public Material hurtMaterial;
     
     public int health = 30;
     public int speed = 3;
     public float FilpTime = 0.05f;
     public float invisableTime = 0.5f;
+    public int[] levelupNeedCoin;
     
-    private GameObject gun;
+    private GameObject activeWeapon;
     private WeaponController weaponController;
     private Animator animator;
     private Rigidbody2D rigidbody2d;
     private SpriteRenderer spriteRenderer;
+    private Transform weaponSlot;
+    private Canvas playerCanvas;
+    private TextMeshProUGUI coinNumTextGUI;
+    private TextMeshProUGUI levelTextGUI;
+    private Slider sliderExpProgress;
 
+    private int level = 0;
+    private int coinNum = 0;
+    private int activeWeaponIndex = 0;
     private Material defaultMaterial;
     private Vector2 move;
+    private GameObject[] guns;
     private bool isFiring = false;
     private bool isFlipping = false;
     private bool isInvisable = false;
@@ -35,20 +48,24 @@ public class PlayerController : MonoBehaviour
     {
         FireAction.Enable();
         MoveAction.Enable();
+        SwitchAction.Enable();
 
         animator = GetComponent<Animator>();
         rigidbody2d = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        playerCanvas = GameObject.FindFirstObjectByType<Canvas>();
+        weaponSlot = transform.Find("WeaponSlot");
+        coinNumTextGUI = playerCanvas.transform.Find("Text_CoinNum").GetComponent<TextMeshProUGUI>();
+        levelTextGUI = playerCanvas.transform.Find("Text_Level").GetComponent<TextMeshProUGUI>();
+        sliderExpProgress = playerCanvas.transform.Find("Slider_Exp").GetComponent<Slider>();
+        
         defaultMaterial = spriteRenderer.material;
-
-        gun = GameObject.FindWithTag("Gun");
-        if (gun != null)
-        {
-            weaponController = gun.GetComponent<WeaponController>();
-        }
 
         FireAction.performed += BeginFire;
         FireAction.canceled  += StopFire;
+        SwitchAction.performed += SwitchWeapon;
+
+        Levelup();
     }
 
     void Update()
@@ -107,20 +124,50 @@ public class PlayerController : MonoBehaviour
     void BeginFire(InputAction.CallbackContext context)
     {
         isFiring = true;
-        weaponController.SetFiring(isFiring);
-        
+        if (weaponController != null)
+        {
+            weaponController.SetFiring(isFiring);
+        }
         speed -= 2;
     }
 
     void StopFire(InputAction.CallbackContext context)
     {
         isFiring = false;
-        
-        weaponController.SetFiring(isFiring);
+
+        if (weaponController != null)
+        {
+            weaponController.SetFiring(isFiring);
+        }
 
         speed += 2;
     }
-    
+
+    void SwitchWeapon(InputAction.CallbackContext context)
+    {
+        float value = context.ReadValue<float>();
+        int index = activeWeaponIndex + (int)value;
+        if (index < 0)
+        {
+            index = weaponSlot.childCount - 1;
+        }
+        else if (index >= level)
+        {
+            index = 0;
+        }
+        SetActiveWeapon(index);
+    }
+
+    void SetActiveWeapon(int index)
+    {
+        GameObject lastWeaponObject = weaponSlot.GetChild(activeWeaponIndex).gameObject;
+        lastWeaponObject.GetComponent<WeaponController>().SetFiring(false);
+        lastWeaponObject.SetActive(false);
+        activeWeaponIndex = Math.Clamp(index, 0, level - 1);
+        GameObject weaponObject = weaponSlot.GetChild(activeWeaponIndex).gameObject;
+        weaponObject.SetActive(true);
+        weaponController = weaponObject.GetComponent<WeaponController>();
+    }
 
     public int GetPlayerFaceDir()
     {
@@ -178,12 +225,37 @@ public class PlayerController : MonoBehaviour
         spriteRenderer.material = defaultMaterial;
     }
 
+    public void PickupCoin(int coinType)
+    {
+        coinNum += Mathf.Max(1, (coinType - 1) * 5);
+        coinNumTextGUI.text = coinNum.ToString();
+        
+
+        if (level < levelupNeedCoin.Length)
+        {
+            if (coinNum >= levelupNeedCoin[level - 1])
+            {
+                coinNum -= levelupNeedCoin[level - 1];
+                Levelup();
+            }
+            sliderExpProgress.value = (float)coinNum / (float)levelupNeedCoin[level];
+        }
+    }
+
+    private void Levelup()
+    {
+        level += 1;
+        levelTextGUI.text = "Level:" + level;
+
+        SetActiveWeapon(level - 1);
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         EnemyController enemy = other.collider.GetComponent<EnemyController>();
         if (enemy != null)
         {
-            TakeDamage(3);
+            TakeDamage(1);
         }
     }
 }

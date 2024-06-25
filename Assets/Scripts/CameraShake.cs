@@ -4,7 +4,7 @@ using System.Collections;
 public class CameraShake : MonoBehaviour
 {
 
-    private Camera camera;
+    private new Camera camera;
 
     public float strength = 2f;
     public float duration = 0.2f;

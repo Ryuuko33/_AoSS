@@ -7,7 +7,8 @@ public class EnemySpawner : MonoBehaviour
     public bool isEnable = false;
     public float spawnInterval = 2f;
     public Vector2 spawnRange = new Vector2(2f, 3f);
-    public GameObject EnemyPrefab;
+    public GameObject[] EnemyPrefabs;
+    public int[] EnemyWeights;
 
     private float cd;
     private Vector2 spawnCenter;
@@ -36,12 +37,21 @@ public class EnemySpawner : MonoBehaviour
             Vector2 dir = Random.insideUnitCircle;
             float radius = Mathf.Lerp(spawnRange.x, spawnRange.y, dir.magnitude);
             Vector2 spawnPos = spawnCenter + radius * dir;
-            GameObject enemyObject = Instantiate(EnemyPrefab, spawnPos, Quaternion.identity);
+            int r = Random.Range(1, 101);
+            for (int i = 0; i < EnemyWeights.Length; i++)
+            {
+                r -= EnemyWeights[i];
+                if (r <= 0)
+                {
+                    GameObject enemyObject = Instantiate(EnemyPrefabs[i], spawnPos, Quaternion.identity);
             
-            Vector2 moveDirection = spawnPos - spawnCenter;
-            float angle = Vector2.Angle(Vector2.right, moveDirection);
+                    Vector2 moveDirection = spawnPos - spawnCenter;
+                    float angle = Vector2.Angle(Vector2.right, moveDirection);
             
-            enemyObject.GetComponent<EnemyController>().SetFaceDir(angle > 90 ? 1 : -1);
+                    enemyObject.GetComponent<EnemyController>().SetFaceDir(angle > 90 ? 1 : -1);
+                    return;
+                }
+            }
         }
     }
 }

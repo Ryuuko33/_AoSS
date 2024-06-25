@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     private GameObject playerCharacter;
-    private Camera camera;
+    private new Camera camera;
 
     public float cameraFollow = 2f;
     

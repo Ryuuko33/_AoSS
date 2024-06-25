@@ -53,6 +53,12 @@ MonoBehaviour:
   FilpTime: 0.05
   dyingTime: 0.1
   hurtMaterial: {fileID: 2100000, guid: 45f2024ddd556b147b89d7c9a7ca0120, type: 2}
+  enemyType: 0
+  dropCoinValue: 5
+  coinPrefabs:
+  - {fileID: 2027577557548812879, guid: fce722795c49ed648bc55fefbec036b1, type: 3}
+  - {fileID: 2241301458375544231, guid: 4d9c64cd32630e146a47a405385163a7, type: 3}
+  - {fileID: 894051801170371705, guid: 4cf39c8ace4b71749bbbda9d9d6236eb, type: 3}
 --- !u!212 &9153030056346884635
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -92,7 +98,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1007937493
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 8596640243658272642, guid: 5d4daff38e3d9174b873918abcf2c1d4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

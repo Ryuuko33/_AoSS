@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private Rigidbody2D rigidbody2D;
+    private new Rigidbody2D rigidbody2D;
     private CameraShake cameraShake;
     
     public float maxDistance = 100.0f;

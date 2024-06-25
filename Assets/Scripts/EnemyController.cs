@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyController : MonoBehaviour
 {
@@ -11,14 +12,19 @@ public class EnemyController : MonoBehaviour
     public float dyingTime = 0.1f;
     public Material hurtMaterial;
     public EnemyType enemyType = EnemyType.Normal;
+    [Range(1, 100)]
+    public int dropCoinValue = 10;
+
+    public GameObject[] coinPrefabs;
+    
     public enum EnemyType
     {
         Normal,
-        Exporsion,
+        Explosion,
         KeepLaunch,
         DeathLaunch
     }
-
+    
     private GameObject playerCharacter;
     private Rigidbody2D rigidbody2d;
     private SpriteRenderer spriteRenderer;
@@ -37,7 +43,6 @@ public class EnemyController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbody2d = GetComponent<Rigidbody2D>();
         playerCharacter = GameObject.FindWithTag("Player");
-        
         defaultMaterial = spriteRenderer.material;
     }
 
@@ -116,7 +121,7 @@ public class EnemyController : MonoBehaviour
     {
         if (!isDead)
         {
-            GetComponent<Animator>().SetBool("IsDead", true);
+            GetComponent<Animator>().SetBool("Is Dead", true);
             transform.GetComponent<BoxCollider2D>().enabled = false;
             transform.localScale = new Vector3(transform.localScale.x, 0, 1);
             isDead = true;
@@ -124,11 +129,36 @@ public class EnemyController : MonoBehaviour
             deadPos = transform.position;
             spriteRenderer.color = Color.grey;
             spriteRenderer.sortingLayerName = "Default";
+            DropCoins();
         }
     }
 
     void SetDefaultMaterial()
     {
         spriteRenderer.material = defaultMaterial;
+    }
+
+    void DropCoins()
+    {
+        int value = Random.Range(dropCoinValue / 2, dropCoinValue);
+        List<int> coinList = new List<int>();
+        int[] coinValue = { 1, 5, 10 };
+        for (int i = 2; i >= 0; i--)
+        {
+            int num = value / coinValue[i];
+            value -= coinValue[i] * num;
+            for (int j = 0; j < num; j++)
+            {
+                coinList.Add(i); }
+        }
+        
+        float angle = 360.0f / (float)coinList.Count;
+        Vector3 selfPos = transform.position;
+        for (int i = 0; i < coinList.Count; i++)
+        {
+            Vector3 dir = Quaternion.AngleAxis(angle * (float)i, Vector3.forward) * Vector2.right;
+            Vector3 coinPos = selfPos + dir;
+            Instantiate(coinPrefabs[coinList[i]], coinPos, Quaternion.identity);
+        }
     }
 }
